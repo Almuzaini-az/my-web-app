@@ -1,0 +1,22 @@
+{
+  "name": "محكمة زكاة الفطر",
+  "short_name": "محكمة الزكاة",
+  "description": "لعبة تعليمية لأحكام زكاة الفطر",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#F5F5DC",
+  "theme_color": "#2E8B57",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
