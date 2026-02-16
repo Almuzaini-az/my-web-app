@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="لعبة تعليمية لمحاكاة محكمة زكاة الفطر">
+    <meta name="theme-color" content="#2E8B57">
+    
+    <title>لعبة محكمة زكاة الفطر</title>
+
+    <!-- روابط PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@1,700&family=Tajawal:wght@500;800&display=swap" rel="stylesheet">
+    
+    <!-- التنسيقات -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="game-container">
+    
+    <!-- التوقيع (Watermark) -->
+    <div class="watermark-bg">
+        <div class="watermark-icon">✒️</div>
+        <div class="watermark-content">
+            <span class="wm-name">أ. عبدالعزيز المزيني</span>
+            <span class="wm-phone">0561277572</span>
+        </div>
+    </div>
+
+    <!-- الهيدر -->
+    <header>
+        <div style="font-weight: bold;">⚖️ محكمة زكاة الفطر</div>
+        <div class="score-board">النقاط: <span id="score">0</span></div>
+    </header>
+
+    <!-- 1. شاشة البداية -->
+    <div id="start-screen" class="screen active">
+        <div class="start-icon">🕌</div>
+        <h1>أهلاً بك أيها القاضي الصغير</h1>
+        <p>بصفتك قاضياً في محكمة الزكاة، عليك الحكم في القضايا المعروضة عليك. استمع للشهود، وتأكد من تطبيق شروط زكاة الفطر (الوقت، المقدار، النوع).</p>
+        <div class="feedback-box" style="font-size: 0.9rem; text-align: center;">
+            تذكر: الزكاة واجبة، مقدارها صاع (3 كجم تقريباً)، من قوت البلد، وتخرج قبل صلاة العيد.
+        </div>
+        <button class="btn" id="start-btn">ابدأ الجلسة</button>
+    </div>
+
+    <!-- 2. شاشة المحكمة -->
+    <div id="court-screen" class="screen">
+        <h2 id="case-title">القضية رقم 1</h2>
+        
+        <div class="courtroom">
+            <div class="scene-area">
+                <div class="character">
+                    <span>👮‍♂️</span>
+                    <p>المدعي</p>
+                </div>
+                <div class="character defendant">
+                    <span id="defendant-emoji">🙍‍♂️</span>
+                    <p>المتهم</p>
+                </div>
+                <div class="character">
+                    <span>🤵</span>
+                    <p>المحامي</p>
+                </div>
+            </div>
+
+            <div class="dialogue-area">
+                <span class="speaker-label" id="speaker-name">المحكمة</span>
+                <div class="dialogue-text" id="dialogue-text">اختر أحد الشهود للاستماع إلى إفادته.</div>
+            </div>
+
+            <div class="witness-box">
+                <div class="witness-btn" data-type="time">
+                    <div class="witness-icon">⏰</div>
+                    <span class="witness-label">الوقت</span>
+                </div>
+                <div class="witness-btn" data-type="amount">
+                    <div class="witness-icon">⚖️</div>
+                    <span class="witness-label">المقدار</span>
+                </div>
+                <div class="witness-btn" data-type="type">
+                    <div class="witness-icon">🌾</div>
+                    <span class="witness-label">الصنف</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button id="judge-btn" class="btn" style="display: none; background-color: var(--primary-color);">إصدار الحكم 🔨</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. نافذة الحكم -->
+    <div id="verdict-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>ما هو حكمك في هذه القضية؟</h3>
+            <div class="choice-grid">
+                <button class="choice-btn verdict-btn" data-verdict="true">✅ الزكاة مقبولة وصحيحة</button>
+                <button class="choice-btn verdict-btn" data-verdict="false">❌ الزكاة غير مقبولة / ناقصة</button>
+            </div>
+            
+            <div id="reason-section" style="display:none; margin-top: 20px;">
+                <h4>ما هو السبب؟</h4>
+                <div class="choice-grid" id="reasons-container">
+                    <!-- Reasons injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. شاشة النتيجة -->
+    <div id="result-screen" class="screen">
+        <div class="gavel-anim" id="gavel-anim">🔨</div>
+        <div id="result-content" style="display: none;">
+            <div class="result-icon" id="result-icon">🌟</div>
+            <h2 id="result-title">حكم سديد!</h2>
+            <div class="feedback-box">
+                <p id="result-feedback">التفاصيل هنا</p>
+            </div>
+            <button class="btn" id="next-case-btn">القضية التالية</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
